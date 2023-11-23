@@ -1,8 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
+import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+import '@mantine/nprogress/styles.css';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import theme from './theme';
+import { Notifications } from '@mantine/notifications';
+import { RouterTransition } from '../lib/components/nProgress';
+import { ModalsProvider } from '@mantine/modals';
 
-const inter = Inter({ subsets: ['latin'] })
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +23,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body >
+        <MantineProvider theme={theme}>
+          <Notifications />
+          <RouterTransition />
+          <ModalsProvider >
+            {children}
+          </ModalsProvider>
+        </MantineProvider>
+      </body>
     </html>
   )
 }
