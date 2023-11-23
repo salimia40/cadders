@@ -17,7 +17,7 @@ import {
 import React from 'react'
 import Link from 'next/link';
 import { z } from 'zod';
-import { authenticate } from '@/lib/actions/auth';
+import { register } from '@/lib/actions/auth';
 import { useRouter } from 'next/navigation';
 import { showNotification } from '@mantine/notifications';
 
@@ -54,7 +54,13 @@ export default function Page() {
       <form onSubmit={form.onSubmit(async (values) => {
         let res = form.validate()
         if (!res.hasErrors) {
-          const result = await authenticate(values)
+          const result = await register({
+            nationalId: values.nationalId,
+            password: values.password,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            phoneNumber: values.phoneNumber
+          })
           if (!result.success) {
             if (result.nationalId) form.setFieldError('nationalId', result.nationalId)
           } else {

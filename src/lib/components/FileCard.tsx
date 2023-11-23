@@ -52,14 +52,14 @@ async function FileCard({ file, paid, assigneeId, isFinalized = false, isClosed 
                         <UploadEditedFiles fileId={file.id} />
                     }
                     {
-                        (user?.role === 'agent' || paid) &&
+                        (user?.role === 'agent' || paid) && file.finalDwgFile &&
                         <Button component='a' href={`/file/${file.finalDwgFile}`} download variant="light" color="green" fullWidth mt="md" size='sm' radius="md" leftSection={<IconDownload size='1rem' />}>
                             Final
                         </Button>
                     }
                     {
                         user?.role === 'client' && !paid && file.finalJpgFile &&
-                        <Button disabled component='a' href={`/file/${file.finalJpgFile}`} download variant="light" color="green" fullWidth mt="md" size='sm' radius="md" leftSection={<IconDownload size='1rem' />}>
+                        <Button component='a' href={`/file/${file.finalJpgFile}`} download variant="light" color="gray" fullWidth mt="md" size='sm' radius="md" leftSection={<IconDownload size='1rem' />} target='_blank'>
                             Preview
                         </Button>
                     }

@@ -5,11 +5,12 @@ import { prisma } from '@/lib/db';
 import { IconFolder } from "@tabler/icons-react"
 import FileCard from '@/lib/components/FileCard';
 import FolderActions from '@/lib/components/FolderActions';
+import { getCurrentUserId } from '@/lib/getCurrentUser';
 
 async function Page({ params }: {
     params: { id: string }
 }) {
-    const userId = await cookies().get("loggedIn")?.value
+    const userId = await getCurrentUserId()
 
     const folder = await prisma.folder.findUnique({
         where: { id: params.id },

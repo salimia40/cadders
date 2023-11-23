@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import React from 'react';
-import { Badge, Button, Card, CardSection, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
+import { Badge, Box, Button, Card, CardSection, Grid, GridCol, Group, Stack, Text, Title, Image } from '@mantine/core';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/db';
 import Link from 'next/link';
@@ -24,7 +24,18 @@ async function Page() {
                     Create New Folder
                 </Button>
             </Group>
+            {
+                folders.length === 0 && <Box>
+                    <Stack align='center' mt={'xl'}>
+                        <Image src={'/empty.svg'} alt='' style={{
+                            width: "30%"
+                        }} />
+                        <Text>You have no folder yet</Text>
+                    </Stack>
+                </Box>
+            }
             <Grid grow>
+
                 {
                     folders.map((folder) => <GridCol key={folder.id} span={3}>
                         <Card withBorder p="xl" radius="md" style={{
