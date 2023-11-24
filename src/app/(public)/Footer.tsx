@@ -1,5 +1,6 @@
-import { Text, Container, ActionIcon, Group, rem, Title } from '@mantine/core';
+import { Text, Container, ActionIcon, Group, rem, Title, Stack } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import classes from './Footer.module.css';
 
 const data = [
     {
@@ -34,8 +35,9 @@ const data = [
 export function Footer() {
     const groups = data.map((group) => {
         const links = group.links.map((link, index) => (
-            <Text
+            <Text<'a'>
                 key={index}
+                className={classes.link}
                 component="a"
                 href={link.link}
             >
@@ -44,32 +46,30 @@ export function Footer() {
         ));
 
         return (
-            <div key={group.title}>
-                <Title order={5}>{group.title}</Title>
-                <Group>
-                    {links}
-                </Group>
+            <div className={classes.wrapper} key={group.title}>
+                <Text className={classes.title}>{group.title}</Text>
+                {links}
             </div>
         );
     });
 
     return (
-        <footer >
-            <Container >
-                <div >
+        <footer className={classes.footer}>
+            <Container className={classes.inner}>
+                <div className={classes.logo}>
                     <Title size={30} >Cadders</Title>
-                    <Text size="xs" c="dimmed" >
+                    <Text size="xs" c="dimmed" className={classes.description}>
                         Build fully functional accessible web applications faster than ever
                     </Text>
                 </div>
-                <div >{groups}</div>
+                <div className={classes.groups}>{groups}</div>
             </Container>
-            <Container >
+            <Container className={classes.afterFooter}>
                 <Text c="dimmed" size="sm">
-                    © 2023 puyaars.ir. All rights reserved.
+                    © 2020 puyaars.ir. All rights reserved.
                 </Text>
 
-                <Group gap={0} justify="flex-end" wrap="nowrap">
+                <Group gap={0} className={classes.social} justify="flex-end" wrap="nowrap">
                     <ActionIcon size="lg" color="gray" variant="subtle">
                         <IconBrandTwitter style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
                     </ActionIcon>
@@ -81,6 +81,5 @@ export function Footer() {
                     </ActionIcon>
                 </Group>
             </Container>
-        </footer>
-    );
+        </footer>);
 }
