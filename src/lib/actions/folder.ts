@@ -310,8 +310,7 @@ export const doneProject = async ({ folderId }: { folderId: string }) => {
   };
 };
 
-export const payProject = async (formData: FormData) => {
-  const folderId = formData.get('folderId') as string;
+export const payProject = async ({ folderId }: { folderId: string }) => {
   await prisma.folder.update({
     where: { id: folderId },
     data: {
@@ -319,8 +318,7 @@ export const payProject = async (formData: FormData) => {
     },
   });
 
-  revalidatePath(`/panel/folders/${folderId}`);
-  redirect(`/panel/folders/${folderId}`);
+  revalidatePath(`/myprojects/${folderId}`);
 };
 
 export const deleteFileItem = async ({

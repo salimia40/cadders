@@ -3,7 +3,7 @@ import {
   getFolderStatus,
   getFolderStatusInPersian,
 } from '@/lib/getFolderStatus';
-import { Button, Divider, Group, Stack, Title, Text } from '@mantine/core';
+import { Divider, Group, Stack, Title, Text } from '@mantine/core';
 import { Descriptions, DescriptionsProps, Empty } from 'antd';
 import React from 'react';
 import { getCurrentUser } from '@/lib/getCurrentUser';
@@ -16,6 +16,7 @@ import AssignMeFolder from '@/lib/components/projects/AssignMeFolder';
 import ProjectDrawer from '@/lib/components/projects/ProjectDrawer';
 import ReturnFolder from '@/lib/components/projects/ReturnFolder';
 import SubmitFinalFolder from '@/lib/components/projects/SubmitFinalFolder';
+import PayProject from '@/lib/components/projects/PayProject';
 
 async function Page({ params }: { params: { id: string } }) {
   const folder = await prisma.folder.findUnique({
@@ -144,11 +145,7 @@ async function Page({ params }: { params: { id: string } }) {
               پروژه در انتظار پرداخت هزینه است
             </Text>
           )}
-          {role === 'client' && (
-            <Button size='xs' variant='transparent' color='green'>
-              پرداخت هزینه
-            </Button>
-          )}
+          {role === 'client' && <PayProject folderId={folder!.id} />}
         </>
       )}
       {status === 'Finished' && (
@@ -189,6 +186,7 @@ async function Page({ params }: { params: { id: string } }) {
             items={folder!.fileItems}
             editable={status === 'Draft'}
             agent={role === 'agent' && folder?.assigneeId === user.id}
+            downloadable={status === 'Finished'}
           />
         </>
       )}

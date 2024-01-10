@@ -8,12 +8,14 @@ import { App, List, Popconfirm } from 'antd';
 import React from 'react';
 import { MessageInstance } from 'antd/es/message/interface';
 import FileDrawer from './FileDrawer';
+import DownloadButton from './DownloadButton';
 
 function FileItemActions({
   item,
   editable,
   agent = false,
   message,
+  downloadable = false,
 }: {
   item: FileItem & {
     files: File[];
@@ -21,6 +23,7 @@ function FileItemActions({
   editable: boolean;
   agent?: boolean;
   message: MessageInstance;
+  downloadable?: boolean;
 }) {
   const actions: React.ReactNode[] = [];
 
@@ -52,6 +55,10 @@ function FileItemActions({
     );
   }
 
+  if (downloadable) {
+    actions.push(<DownloadButton files={item.files} />);
+  }
+
   return actions;
 }
 
@@ -59,12 +66,14 @@ function FileItemsList({
   items,
   editable,
   agent = false,
+  downloadable = false,
 }: {
   items: (FileItem & {
     files: File[];
   })[];
   editable: boolean;
   agent?: boolean;
+  downloadable?: boolean;
 }) {
   const { message } = App.useApp();
   return (
@@ -78,6 +87,7 @@ function FileItemsList({
             editable,
             agent,
             message,
+            downloadable,
           })}
         >
           <List.Item.Meta
