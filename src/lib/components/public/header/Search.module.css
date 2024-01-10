@@ -1,0 +1,28 @@
+.search {
+  width: 300;
+  minwidth: 150;
+  padding: 0.5rem;
+  background: linear-gradient(
+    -90deg,
+    rgb(253 252 252, 0.7) 0%,
+    rgb(181 181 182) 100%
+  );
+
+  .mantine-Input-input {
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 0;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    width: 100%;
+    min-width: 150px;
+    transition: all 0.3s ease-in-out;
+
+    &:focus {
+      border: 1px solid #fff;
+      box-shadow: 0 0 0 2px #fff;
+      outline: none;
+    }
+  }
+}

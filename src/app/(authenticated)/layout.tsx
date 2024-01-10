@@ -1,17 +1,15 @@
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/lib/getCurrentUser';
+import Shell from '@/lib/components/Shell';
+import React from 'react';
 
 export default async function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode;
 }) {
-    const user = await getCurrentUser()
-    if (!user) redirect('/login')
+  const user = await getCurrentUser();
+  if (!user) redirect('/login');
 
-    return (
-        <>
-            {children}
-        </>
-    )
+  return <Shell role={user.role}>{children}</Shell>;
 }

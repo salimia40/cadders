@@ -1,3 +1,7 @@
 {
-  "extends": ["next/core-web-vitals", "mantine"]
+  "extends": ["next/core-web-vitals", "mantine", "prettier"],
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "project": "./tsconfig.json"
+  }
 }

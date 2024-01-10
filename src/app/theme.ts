@@ -1,9 +1,17 @@
-"use client"
+import { createTheme } from '@mantine/core';
+import { ThemeConfig } from 'antd';
+import { vazirmatn } from './fonts';
 
-import { createTheme } from "@mantine/core";
-
-const theme = createTheme({
-    /** Put your mantine theme override here */
+const mantineTheme = createTheme({
+  /** Put your mantine theme override here */
+  fontFamily: vazirmatn.style.fontFamily,
 });
 
-export default theme;
+const antdTheme: ThemeConfig = {
+  token: {
+    fontFamily: vazirmatn.style.fontFamily,
+  },
+  inherit: true,
+};
+
+export default { mantineTheme, antdTheme };
